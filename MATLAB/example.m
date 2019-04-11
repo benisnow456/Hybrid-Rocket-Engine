@@ -16,12 +16,12 @@ close all;
 close all
 burn_time = 10;
 burn_delay = 0.5;
-padding = 2;
-dt = 20;
+padding = 2;                    % seconds to display before and after burn
+dt = 20;                        % steps per second
 
-D_throat = (19/64)*0.0254;       % in meters
-D_exit = 0.5*0.0254;             % in meters
-D_port = (5/8)*0.0254;           % in meters
+D_throat = (19/64)*0.0254;      % in meters
+D_exit = 0.5*0.0254;            % in meters
+D_port = (5/8)*0.0254;          % in meters
 
 % These second order fitting coefficients were determined experimentally
 O2_coeffic = [0.000010894432  -0.000720645427   0.023080625849];
