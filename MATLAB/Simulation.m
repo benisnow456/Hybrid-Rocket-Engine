@@ -62,6 +62,7 @@ classdef Simulation < handle
             obj.Pe = zeros(size, 1);         % exhaust pressure
             obj.Pc = zeros(size, 1);         % chamber pressure
             obj.temp = zeros(size, 1);       % combustion temperature
+            obj.Isp = zeros(size, 1);        % Specific impulse, in s
             
             burn_start = find(mdot_O2, 1);       % find start of othe burn
             burn_end = find(mdot_O2, 1, 'last'); % find end of the burn
@@ -101,12 +102,17 @@ classdef Simulation < handle
             obj.Pc(burn_end+1:size) = obj.P_atm;
             obj.Pe(1:burn_start) = obj.P_atm;
             obj.Pe(burn_end+1:size) = obj.P_atm;
+            %set velocity and Isp to 0 if engine isn't on
+            obj.Ve(1:burn_start) = 0;
+            obj.Ve(burn_end+1:size) = 0;
+            obj.Isp(1:burn_start) = 0;
+            obj.Isp(burn_end+1:size) = 0;
             
             %Calculate and correct thrust
             obj.thrust = obj.mdot_total.*obj.Ve + (obj.Pe-obj.P_atm)*A_e;
             lambda = (1+cosd(obj.nozzle_angle/2))/2;
             obj.thrust = obj.thrust*lambda*obj.scaling;
-            obj.Isp = obj.thrust/(obj.mdot_total*obj.g0);
+            obj.Isp = obj.thrust./(obj.mdot_total*obj.g0);
             obj.fuel_burned = sum(obj.mdot_fuel)/dt;
         end        
     end
