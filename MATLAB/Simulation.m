@@ -22,7 +22,7 @@ classdef Simulation < handle
         L_fuel = 0.180975;         % length of the fuel rod, in m
         rho_fuel = 998;            % fuel density, in kg/m^3
         gamma = 1.4;               % heat capacity ratio of oxygen
-        a = 0.00017;               % fuel regression rate coefficient
+        a = 0.00016;               % fuel regression rate coefficient
         n = 0.31;                  % fuel regression rate exponent
         Cstar_init = 1600;         % initial guess of Cstar, in m/s
         P_atm = 101325;            % atmospheric pressure, in Pascals 
